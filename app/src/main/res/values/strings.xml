@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">snapgallery</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_txt">Take a snap</string>
+    <string name="foto_txt">Foto page</string>
+    <string name="video_txt">Video page</string>
+</resources>

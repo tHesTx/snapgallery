@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ro.fmi.snapgallery">
+
+    <!--    If an essential function of your application is taking pictures, then restrict its visibility on Google Play to devices that have a camera.
+    To advertise that your application depends on having a camera, put a <uses-feature> tag in your manifest file:-->
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <!--    The Android Camera application saves a full-size photo if you give it a file to save into.
+    You must provide a fully qualified file name where the camera app should save the photo.-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--fara asta aplicatia va crash-ui cand pornesti camera-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="ro.fmi.snapgallery.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!--        <meta-data-->
+            <!--            android:name="android.support.FILE_PROVIDER_PATHS"-->
+            <!--            android:resource ="@xml/file_paths" />-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider" />
+        </provider>
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
