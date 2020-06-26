@@ -1,5 +1,7 @@
 package ro.fmi.snapgallery.fragments
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -52,27 +54,33 @@ class ShareFragment : Fragment() {
 
 //        val res: Resources = resources
 //        val drawable: Drawable = res.getDrawable(R.drawable.img1)
-val img1 =Uri.parse("android.resource://ro.fmi.cnapgallery"+R.drawable.img1)
-val img2 =Uri.parse("android.resource://ro.fmi.cnapgallery"+R.drawable.img2)
+val imageUri1 =Uri.parse("android.resource://ro.fmi.cnapgallery"+R.drawable.img1)
+val imageUri2 =Uri.parse("android.resource://ro.fmi.cnapgallery"+R.drawable.img2)
 
         shareBtn.setOnClickListener{
-           // val imageUris: ArrayList<Uri> = arrayListOf(
-//            // Add your image URIs here
-//            imageUri1,
-//            imageUri2
-//        )
-//
-//        val shareIntent = Intent().apply {
-//            action = Intent.ACTION_SEND_MULTIPLE
-//            putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris)
-//            type = "image/*"
-//        }
-//        startActivity(Intent.createChooser(shareIntent, "Share images to.."))
-            Toast.makeText(
-                this.activity,
-                "Nu am reusit implementarea...",
-                Toast.LENGTH_SHORT
-            ).show()
+            val imageUris: ArrayList<Uri> = arrayListOf(
+            // Add your image URIs here
+            imageUri1,
+            imageUri2
+        )
+
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND_MULTIPLE
+            putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris)
+            type = "image/*"
+        }
+            try {
+
+                startActivity(Intent.createChooser(shareIntent, "Share images to.."))
+            }catch(e: ActivityNotFoundException)
+            {
+                Toast.makeText(
+                    this.activity,
+                    "Nu s-a putut face share...",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
 
     }
